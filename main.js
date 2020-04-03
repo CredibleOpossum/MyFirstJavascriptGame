@@ -13,7 +13,7 @@ var previousValues = {
 };
 
 if (localStorage.game != undefined) {
-	game = JSON.parse(localStorage.game);
+	game = JSON.parse(atob(localStorage.game));
 	update();
 	check();
 } else {
@@ -61,7 +61,7 @@ function update() {
 	}
 	if (previousValues.foodAmount != game.resources.food) {
 		previousValues.foodAmount = game.resources.food;
-		perSecound = game.work.farmers - game.work.lumberjacks * 3 - game.resources.unassigned;
+		perSecound = game.work.farmers - game.work.lumberjacks * 2 - game.resources.unassigned;
 		document.getElementById("foodAmount").innerText = "Food: " + game.resources.food.toFixed(2) + ` (${perSecound}/s)`;
 		check();
 	}
@@ -96,10 +96,10 @@ function update() {
 function check() {
 	document.getElementById("expandable").innerHTML = "";
 	document.getElementById("buyable").innerText = "";
-	for (var loop = 0; loop < game.createable.length; loop++) {
-		// Loops through all game.createables to find ones possible to create
-		if (game.resources.food >= game.createable[loop].foodCost && game.resources.wood >= game.createable[loop].woodCost) {
-			createcreateable(game.createable[loop].amount, game.createable[loop].name, loop, game.createable[loop].foodCost, game.createable[loop].woodCost);
+	for (var item in game.createable) {
+		var createable = game.createable[item];
+		if (game.resources.food >= createable.foodCost && game.resources.wood >= createable.woodCost) {
+			createCreateable(createable);
 		}
 	}
 }
@@ -174,23 +174,23 @@ function create(type) {
 	check();
 }
 
-function createcreateable(amount, name, id, foodCost, woodCost) {
-	document.getElementById("expandable").innerHTML += `<div>${amount}</div>`;
+function createCreateable(createable, id) {
+	document.getElementById("expandable").innerHTML += `<div>${createable.amount}</div>`;
 	costString = "(";
-	if (foodCost != 0) {
-		costString += foodCost.toFixed(2) + " food ";
+	if (createable.foodCost != 0) {
+		costString += createable.foodCost.toFixed(2) + " food ";
 	}
-	if (woodCost != 0) {
-		costString += woodCost.toFixed(2) + " wood";
+	if (createable.woodCost != 0) {
+		costString += createable.woodCost.toFixed(2) + " wood";
 	}
 	costString += ")";
-	document.getElementById("expandable").innerHTML += `<button onclick=create(${id})>Buy ${name} ${costString}</button><br>`;
+	document.getElementById("expandable").innerHTML += `<button onclick=create(${game.createable.indexOf(createable)})>Buy ${createable.name} ${costString}</button><br>`;
 	document.getElementById("expandable").innerHTML += `<br>`;
 }
 
 function doWork() {
 	game.resources.food -= game.resources.unassigned; // Removes food for unassigned farmers
-	game.resources.food -= game.work.lumberjacks * 3; // Removes 3 food per lumberjack
+	game.resources.food -= game.work.lumberjacks * 2; // Removes 3 food per lumberjack
 	game.resources.food += game.work.farmers; // Gives food for every farmer
 	game.resources.wood += game.work.lumberjacks; // Gives wood for every lumberjack
 }
@@ -207,7 +207,7 @@ function main() {
 }
 
 function save() {
-	localStorage.setItem("game", JSON.stringify(game, null));
+	localStorage.setItem("game", btoa(JSON.stringify(game)));
 }
 
 setInterval(main, 1000); // Calls "main" every secound
