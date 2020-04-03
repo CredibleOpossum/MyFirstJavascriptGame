@@ -1,3 +1,8 @@
+function reset() {
+	localStorage.clear();
+	location.reload();
+}
+
 var previousValues = {
 	foodAmount: 0,
 	woodAmount: 0,
@@ -34,14 +39,14 @@ if (localStorage.game != undefined) {
 			{
 				amount: 0,
 				name: "House",
-				foodCost: 0,
+				foodCost: 10,
 				woodCost: 20,
 				housingBenefit: 3,
 			},
 			{
 				amount: 0,
 				name: "Great house",
-				foodCost: 0,
+				foodCost: 15,
 				woodCost: 30,
 				housingBenefit: 5,
 			},
@@ -50,20 +55,20 @@ if (localStorage.game != undefined) {
 }
 
 function update() {
-	if (game.resources.availableHousing != 0 || game.work.farmers + game.work.lumberjack != 0) {
+	if (game.resources.availableHousing != 0 || game.work.farmers != 0 || game.work.lumberjacks != 0) {
 		// Only update when the value actually changed
 		document.getElementById("housingOptions").style.display = "block";
 	}
 	if (previousValues.foodAmount != game.resources.food) {
 		previousValues.foodAmount = game.resources.food;
 		perSecound = game.work.farmers - game.work.lumberjacks * 3 - game.resources.unassigned;
-		document.getElementById("foodAmount").innerText = "Food: " + game.resources.food + ` (${perSecound}/s)`;
+		document.getElementById("foodAmount").innerText = "Food: " + game.resources.food.toFixed(2) + ` (${perSecound}/s)`;
 		check();
 	}
 	if (previousValues.woodAmount != game.resources.wood) {
 		previousValues.woodAmount = game.resources.food;
 		perSecound = game.work.lumberjacks * 3;
-		document.getElementById("woodAmount").innerText = "Wood: " + game.resources.wood + ` (${perSecound}/s)`;
+		document.getElementById("woodAmount").innerText = "Wood: " + game.resources.wood.toFixed(2) + ` (${perSecound}/s)`;
 		check();
 	}
 	if (previousValues.housingAmount != game.resources.availableHousing) {
@@ -94,7 +99,7 @@ function check() {
 	for (var loop = 0; loop < game.createable.length; loop++) {
 		// Loops through all game.createables to find ones possible to create
 		if (game.resources.food >= game.createable[loop].foodCost && game.resources.wood >= game.createable[loop].woodCost) {
-			createcreateable(game.createable[loop].amount, game.createable[loop].name, loop, game.createable[loop].woodCost);
+			createcreateable(game.createable[loop].amount, game.createable[loop].name, loop, game.createable[loop].foodCost, game.createable[loop].woodCost);
 		}
 	}
 }
@@ -163,13 +168,23 @@ function create(type) {
 		houses += game.createable[loop].amount * game.createable[loop].housingBenefit;
 	}
 	game.resources.availableHousing = houses - (game.resources.unassigned + game.work.farmers + game.work.lumberjacks); // Calculates the avalable houses by removing the the game.workers from total housing
+	game.createable[type].foodCost *= 1.1;
+	game.createable[type].woodCost *= 1.1;
 	update();
 	check();
 }
 
-function createcreateable(amount, name, id, price) {
+function createcreateable(amount, name, id, foodCost, woodCost) {
 	document.getElementById("expandable").innerHTML += `<div>${amount}</div>`;
-	document.getElementById("expandable").innerHTML += `<button onclick=create(${id})>Buy ${name} (${price} wood)</button><br>`;
+	costString = "(";
+	if (foodCost != 0) {
+		costString += foodCost.toFixed(2) + " food ";
+	}
+	if (woodCost != 0) {
+		costString += woodCost.toFixed(2) + " wood";
+	}
+	costString += ")";
+	document.getElementById("expandable").innerHTML += `<button onclick=create(${id})>Buy ${name} ${costString}</button><br>`;
 	document.getElementById("expandable").innerHTML += `<br>`;
 }
 
