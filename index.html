@@ -5,38 +5,39 @@
 	<meta charset="utf-8">
 	<title>Welcome!</title>
 	<style>
-	body{
-	  padding: 25px;
-	  background-color: white;
-	  color: black;
-	  font-size: 16px;
-	}
+		body {
+			padding: 25px;
+			background-color: white;
+			color: black;
+			font-size: 16px;
+		}
 
-	.dark-mode {
-	  background-color: black;
-	  color: white;
-	}
+		.dark-mode {
+			background-color: black;
+			color: white;
+		}
+
 		@keyframes slide {
-		        from {
-		          background-position-x: -50%;
-		        }
-		        to {
-		          background-position-x: -200%;
-		        }
-		      }
+			from {
+				background-position-x: -50%;
+			}
+			to {
+				background-position-x: -200%;
+			}
+		}
 
-		      .container {
-		        width: 290%;
-		        height: 18px;
-		        background-image: url("data:image/svg+xml;utf8,\
+		.container {
+			width: 290%;
+			height: 18px;
+			background-image: url("data:image/svg+xml;utf8,\
 		      <svg xmlns='http://www.w3.org/2000/svg' width='2500'>\
 		        <text x='0' y='12'>I found this code on stackoverflow, i have no idea how it works.</text>\
 		      </svg>\
 		      ");
-		        background-repeat: repeat;
-		        background-size: auto;
-		        animation: 25s linear infinite slide;
-		      }
+			background-repeat: repeat;
+			background-size: auto;
+			animation: 25s linear infinite slide;
+		}
 	</style>
 </head>
 
@@ -52,12 +53,12 @@
 	<br>
 	<div id="buyable"></div>
 	<div hidden id="housingOptions">
-		<div id="Unassigned">Unassigned: 0</div>
+		<div id="unassigned">Unassigned: 0</div>
 		<button type="button" id="createVillager" onclick="createVillager()">Add villager (10 Food)</button>
-		<div id="Farmers">Farmers: 0</div>
+		<div id="farmers">Farmers: 0</div>
 		<button type="button" onclick="assignFarmer()">Add</button>
 		<button type="button" onclick="unassignFarmer()">Remove</button>
-		<div id="Lumberjacks">Lumberjacks: 0</div>
+		<div id="lumberjacks">Lumberjacks: 0</div>
 		<button type="button" onclick="assignLumberjacks()">Add</button>
 		<button type="button" onclick="unassignLumberjacks()">Remove</button>
 		<br>
@@ -67,5 +68,6 @@
 	<br>
 </div>
 <div id="expandable"></div>
+
 </html>
 <script src="main.js"></script>
