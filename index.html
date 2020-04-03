@@ -2,71 +2,83 @@
 <html lang="en" dir="ltr">
 
 <head>
-	<meta charset="utf-8">
-	<title>Welcome!</title>
-	<style>
-		body {
-			padding: 25px;
-			background-color: white;
-			color: black;
-			font-size: 16px;
-		}
+    <meta charset="utf-8">
+    <title>Welcome!</title>
+    <style>
+        button {
+            outline: black solid 2px;
+            background-color: grey;
+            border: none;
+            color: white;
+            padding: 2px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+        }
 
-		.dark-mode {
-			background-color: black;
-			color: white;
-		}
+        body {
+            padding: 25px;
+            background-color: #95a396;
+            color: black;
+            font-size: 20px;
+        }
 
-		@keyframes slide {
-			from {
-				background-position-x: -50%;
-			}
-			to {
-				background-position-x: -200%;
-			}
-		}
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
 
-		.container {
-			width: 290%;
-			height: 18px;
-			background-image: url("data:image/svg+xml;utf8,\
+        @keyframes slide {
+            from {
+                background-position-x: -50%;
+            }
+            to {
+                background-position-x: -200%;
+            }
+        }
+
+        .container {
+            width: 290%;
+            height: 18px;
+            background-image: url("data:image/svg+xml;utf8,\
 		      <svg xmlns='http://www.w3.org/2000/svg' width='2500'>\
 		        <text x='0' y='12'>I found this code on stackoverflow, i have no idea how it works.</text>\
 		      </svg>\
 		      ");
-			background-repeat: repeat;
-			background-size: auto;
-			animation: 25s linear infinite slide;
-		}
-	</style>
+            background-repeat: repeat;
+            background-size: auto;
+            animation: 25s linear infinite slide;
+        }
+    </style>
 </head>
 
 <body>
-	<button type="button" onclick="toggleDarkMode()">Toggle Darkmode?</button><button type="button" onclick="reset()">Reset?</button>
-	<div class="container"></div>
-	<div id="foodAmount">Food: 0</div>
-	<div id="woodAmount">Wood: 0</div>
-	<button type="button" id="foodButton" onclick="collect('food')">Get Food</button>
-	<button type="button" id="woodButton" onclick="collect('wood')">Get Wood</button>
-	<br>
-	<div id="housingAmount">Available Homes: 0</div>
-	<br>
-	<div id="buyable"></div>
-	<div hidden id="housingOptions">
-		<div id="unassigned">Unassigned: 0</div>
-		<button type="button" id="createVillager" onclick="createVillager()">Add villager (10 Food)</button>
-		<div id="farmers">Farmers: 0</div>
-		<button type="button" onclick="assignFarmer()">Add</button>
-		<button type="button" onclick="unassignFarmer()">Remove</button>
-		<div id="lumberjacks">Lumberjacks: 0</div>
-		<button type="button" onclick="assignLumberjacks()">Add</button>
-		<button type="button" onclick="unassignLumberjacks()">Remove</button>
-		<br>
-	</div>
+    <div class="container"></div>
+    <button type="button" onclick="toggleDarkMode()">Toggle Darkmode?</button>
+    <button type="button" onclick="reset()">Reset?</button>
+    <p></p>
+    <div id="foodAmount">Food: 0 (0/s)</div>
+    <div id="woodAmount">Wood: 0 (0/s)</div>
+    <button type="button" id="foodButton" onclick="collect('food')">Get Food</button>
+    <button type="button" id="woodButton" onclick="collect('wood')">Get Wood</button>
+    <br>
+    <div id="housingAmount">Available Homes: 0</div>
+    <br>
+    <div id="buyable"></div>
+    <div hidden id="housingOptions">
+        <div id="unassigned">Unassigned: 0</div>
+        <button type="button" id="createVillager" onclick="createVillager()">Add villager (10 Food)</button>
+        <div id="farmers">Farmers: 0</div>
+        <button type="button" onclick="assignFarmer()">Add</button>
+        <button type="button" onclick="unassignFarmer()">Remove</button>
+        <div id="lumberjacks">Lumberjacks: 0</div>
+        <button type="button" onclick="assignLumberjacks()">Add</button>
+        <button type="button" onclick="unassignLumberjacks()">Remove</button>
+        <p></p>
+    </div>
 </body>
-<div>
-	<br>
-</div>
+
 <div id="expandable"></div>
 
 </html>
