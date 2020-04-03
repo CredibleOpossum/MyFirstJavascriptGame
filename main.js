@@ -42,7 +42,7 @@ function check() {
 	document.getElementById("buyable").innerText = "";
 	for (var loop = 0; loop < createable.length; loop++) { // Loops through all createables to find ones possible to create
 		if (resources[0] >= createable[loop][2] && resources[1] >= createable[loop][3]) {
-			createCreateable(createable[loop][0], createable[loop][1], loop);
+			createCreateable(createable[loop][0], createable[loop][1], loop, createable[loop][3]);
 		}
 	}
 }
@@ -108,9 +108,9 @@ function create(type) {
 	check();
 }
 
-function createCreateable(amount, name, id) {
+function createCreateable(amount, name, id, price) {
 	document.getElementById("expandable").innerHTML += `<div>${amount}</div>`;
-	document.getElementById("expandable").innerHTML += `<button onclick=create(${id})>Buy ${name}</button><br>`;
+	document.getElementById("expandable").innerHTML += `<button onclick=create(${id})>Buy ${name} (${price} wood)</button><br>`;
 	document.getElementById("expandable").innerHTML += `<br>`;
 }
 
