@@ -1,4 +1,3 @@
-<script src="main.js"></script>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -6,6 +5,17 @@
 	<meta charset="utf-8">
 	<title>Welcome!</title>
 	<style>
+	body{
+	  padding: 25px;
+	  background-color: white;
+	  color: black;
+	  font-size: 16px;
+	}
+
+	.dark-mode {
+	  background-color: black;
+	  color: white;
+	}
 		@keyframes slide {
 		        from {
 		          background-position-x: -50%;
@@ -31,11 +41,12 @@
 </head>
 
 <body>
+	<button type="button" onclick="toggleDarkMode()">Toggle Darkmode?</button>
 	<div class="container"></div>
 	<div id="foodAmount">Food: 0</div>
 	<div id="woodAmount">Wood: 0</div>
-	<button type="button" id="foodButton" onclick="collect(0)">Get Food</button>
-	<button type="button" id="woodButton" onclick="collect(1)">Get Wood</button>
+	<button type="button" id="foodButton" onclick="collect('food')">Get Food</button>
+	<button type="button" id="woodButton" onclick="collect('wood')">Get Wood</button>
 	<br>
 	<div id="housingAmount">Available Homes: 0</div>
 	<br>
@@ -56,5 +67,5 @@
 	<br>
 </div>
 <div id="expandable"></div>
-
 </html>
+<script src="main.js"></script>
