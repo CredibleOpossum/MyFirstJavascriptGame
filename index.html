@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-    <meta charset="utf-8">
-    <title>Welcome!</title>
-    <style>
+	<head>
+		<meta charset="utf-8">
+			<title>Welcome!</title>
+			<style>
         button {
           outline: black solid 2px;
           background-color: #aba79d;
@@ -26,45 +25,34 @@
             background-color: black;
             color: white;
         }
-
-        @keyframes slide {
-            from {
-                background-position-x: -50%;
-            }
-            to {
-                background-position-x: -200%;
-            }
-        }
-	    
     </style>
-</head>
-
-<body>
-    <button type="button" onclick="toggleDarkMode()">Toggle Darkmode?</button>
-    <button type="button" onclick="reset()">Reset?</button>
-    <p></p>
-    <div id="foodAmount">Food: 0 (0/s)</div>
-    <div id="woodAmount">Wood: 0 (0/s)</div>
-    <button type="button" id="foodButton" onclick="collect('food')">Get Food</button>
-    <button type="button" id="woodButton" onclick="collect('wood')">Get Wood</button>
-    <br>
-    <div id="housingAmount">Available Homes: 0</div>
-    <br>
-    <div id="buyable"></div>
-    <div hidden id="housingOptions">
-        <div id="unassigned">Unassigned: 0</div>
-        <button type="button" id="createVillager" onclick="createVillager()">Add villager (10 Food)</button>
-        <div id="farmers">Farmers: 0</div>
-        <button type="button" onclick="assignFarmer()">Add</button>
-        <button type="button" onclick="unassignFarmer()">Remove</button>
-        <div id="lumberjacks">Lumberjacks: 0</div>
-        <button type="button" onclick="assignLumberjacks()">Add</button>
-        <button type="button" onclick="unassignLumberjacks()">Remove</button>
-        <p></p>
-    </div>
-</body>
-
-<div id="expandable"></div>
-
-</html>
-<script src="main.js"></script>
+		</head>
+		<body>
+			<button type="button" onclick="toggleDarkMode()">Toggle Darkmode?</button>
+			<button type="button" onclick="reset()">Reset?</button>
+			<p></p>
+			<div id="foodAmount">Food: 0 (0/s)</div>
+			<div id="woodAmount">Wood: 0 (0/s)</div>
+			<button type="button" id="foodButton" onclick="collect('food')">Get Food</button>
+			<button type="button" id="woodButton" onclick="collect('wood')">Get Wood</button>
+			<br>
+				<div id="housingAmount">Available Homes: 0</div>
+				<br>
+					<div id="buyable"></div>
+					<div hidden id="housingOptions">
+						<div id="unassigned">Unassigned: 0</div>
+						<button type="button" id="createVillager" onclick="createVillager()">Add villager (10 Food)</button>
+						<div id="farmers">Farmers: 0.00 (0/s)</div>
+						<button type="button" onclick="assignFarmer()">Add</button>
+						<button type="button" onclick="unassignFarmer()">Remove</button>
+						<div id="lumberjacks">Lumberjacks: 0.00 (0/s)</div>
+						<button type="button" onclick="assignLumberjacks()">Add</button>
+						<button type="button" onclick="unassignLumberjacks()">Remove</button>
+						<p></p>
+					</div>
+				</body>
+				<div id="expandable"></div>
+			</html>
+      <script src="scripts/workerFunctions.js"></script>
+      <script src="scripts/update.js"></script>
+      <script src="scripts/game.js"></script>
