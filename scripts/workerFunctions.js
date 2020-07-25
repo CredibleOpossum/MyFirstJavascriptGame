@@ -13,7 +13,7 @@ function createVillager() {
 
 function assignFarmer() {
 	if (game.resources.unassigned != 0) {
-		// Only allow if theres not 0 unassigned
+		// Only allow if there's not 0 unassigned
 		game.resources.unassigned--; // Removes an unassigned
 		game.work.farmers++; // Increments the farmer game.worker
 	}
@@ -22,7 +22,7 @@ function assignFarmer() {
 
 function assignLumberjacks() {
 	if (game.resources.unassigned != 0) {
-		// Only allow if theres not 0 unassigned
+		// Only allow if there's not 0 unassigned
 		game.resources.unassigned--; // Removes an unassigned
 		game.work.lumberjacks++; // Increments the lumberjack game.worker
 	}
@@ -31,7 +31,7 @@ function assignLumberjacks() {
 
 function unassignFarmer() {
 	if (game.work.farmers != 0) {
-		// Only allow remove if theres game.workers to remove
+		// Only allow remove if there's game.workers to remove
 		game.work.farmers--; // Removes a game.worker
 		game.resources.unassigned++; // Increments the unassigned resource
 	}
@@ -40,7 +40,7 @@ function unassignFarmer() {
 
 function unassignLumberjacks() {
 	if (game.work.lumberjacks != 0) {
-		// Only allow remove if theres game.workers to remove
+		// Only allow remove if there's game.workers to remove
 		game.work.lumberjacks--; // Removes a game.worker
 		game.resources.unassigned++; // Increments the unassigned resource
 	}
