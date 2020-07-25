@@ -4,8 +4,8 @@ function toggleDarkMode() {
 }
 
 function reset() {
-	localStorage.clear();
-	location.reload();
+	localStorage.clear(); // Clears saved data
+	location.reload(); // Refreshes
 }
 
 function save() {
@@ -60,17 +60,6 @@ if (localStorage.game != undefined) {
 	check();
 }
 
-function check() {
-	document.getElementById("expandable").innerHTML = "";
-	document.getElementById("buyable").innerText = "";
-	for (var item in game.createable) {
-		var createable = game.createable[item];
-		if (game.resources.food >= createable.foodCost && game.resources.wood >= createable.woodCost) {
-			createCreateable(createable);
-		}
-	}
-}
-
 function collect(resource) {
 	game.resources[resource]++; // Increments the collected resource
 	update();
@@ -86,8 +75,8 @@ function create(type) {
 		houses += game.createable[loop].amount * game.createable[loop].housingBenefit;
 	}
 	game.resources.availableHousing = houses - (game.resources.unassigned + game.work.farmers + game.work.lumberjacks); // Calculates the avalable houses by removing the the game.workers from total housing
-	game.createable[type].foodCost *= 1.1;
-	game.createable[type].woodCost *= 1.1;
+	game.createable[type].foodCost *= 1.1; // Scales the price of the creatable
+	game.createable[type].woodCost *= 1.1; // Scales the price of the creatable
 	update();
 	check();
 }
@@ -102,12 +91,12 @@ function createCreateable(createable, id) {
 		costString += createable.woodCost.toFixed(2) + " wood";
 	}
 	costString += ")";
-	document.getElementById("expandable").innerHTML += `<button onclick=create(${game.createable.indexOf(createable)})>Buy ${createable.name} ${costString}</button><br>`;
+	document.getElementById("expandable").innerHTML += `<button onclick=create(${game.createable.indexOf(createable)})>Buy ${createable.name} ${costString}</button><br>`; // Builds and displays bases on the createable variable
 	document.getElementById("expandable").innerHTML += `<br>`;
 }
 
 function doWork() {
-	game.resources.food -= game.resources.unassigned; // Removes food for unassigned farmers
+	game.resources.food -= game.resources.unassigned; // Removes food for unassigned workers
 	game.resources.food -= game.work.lumberjacks * 2; // Removes 3 food per lumberjack
 	game.resources.food += game.work.farmers; // Gives food for every farmer
 	game.resources.wood += game.work.lumberjacks; // Gives wood for every lumberjack
